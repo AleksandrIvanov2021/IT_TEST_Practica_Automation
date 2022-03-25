@@ -32,12 +32,4 @@ class LoginPage(BasePage):
     def __should_be_login_button(self):
         assert self.is_element_present(*LoginPageLocators.LOGIN_BUTTON), "Login button is not presented"
 
-    def should_be_authorized_user(self, email, password):
-        email_field = self.driver.find_element(*LoginPageLocators.LOGIN_EMAIL)
-        email_field.send_keys(email)
-        password_field = self.driver.find_element(*LoginPageLocators.LOGIN_PASSWORD)
-        password_field.send_keys(password)
-        checkbox = self.driver.find_element(*LoginPageLocators.CHECKBOX_SAVE)
-        checkbox.click()
-        login_button = self.driver.find_element(*LoginPageLocators.LOGIN_BUTTON)
-        login_button.click()
+
