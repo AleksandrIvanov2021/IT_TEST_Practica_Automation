@@ -57,25 +57,4 @@ class RegistrationPage(BasePage):
     def __should_be_register_button(self):
         assert self.is_element_present(*RegistrationPageLocators.REGISTER_BUTTON), "register button is not presented"
 
-    def __should_be_continue_button(self):
-        assert self.is_element_present(*RegistrationPageLocators.CONTINUE_BUTTON), "continue button is not presented"
-
-    def register_new_user(self, first_name, last_name, email, password, confirm_password):
-        radiobutton_gender_field = self.driver.find_element(*RegistrationPageLocators.GENDER_FEMALE_RADIOBUTTON)
-        radiobutton_gender_field.click()
-        first_name_field = self.driver.find_element(*RegistrationPageLocators.FIRST_NAME)
-        first_name_field.send_keys(first_name)
-        last_name_field = self.driver.find_element(*RegistrationPageLocators.LAST_NAME)
-        last_name_field.send_keys(last_name)
-        email_field = self.driver.find_element(*RegistrationPageLocators.REGISTER_EMAIL)
-        email_field.send_keys(email)
-        password_field = self.driver.find_element(*RegistrationPageLocators.REGISTER_PASSWORD_1)
-        password_field.send_keys(password)
-        confirm_password_field = self.driver.find_element(*RegistrationPageLocators.REGISTER_PASSWORD_2)
-        confirm_password_field.send_keys(confirm_password)
-        button_registration_submit = self.driver.find_element(*RegistrationPageLocators.REGISTER_BUTTON)
-        button_registration_submit.click()
-        self.__should_be_continue_button()
-        button_continue = self.driver.find_element(*RegistrationPageLocators.CONTINUE_BUTTON)
-        button_continue.click()
 
