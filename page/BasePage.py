@@ -1,5 +1,5 @@
 from selenium.common.exceptions import NoSuchElementException
-from page.locators import LoginPageLocators, RegistrationPageLocators
+from page.locators import LoginPageLocators, RegistrationPageLocators, ChangePasswordPageLocators
 
 
 class BasePage:
@@ -46,3 +46,18 @@ class BasePage:
         assert self.is_element_present(*RegistrationPageLocators.CONTINUE_BUTTON), "continue button is not presented"
         button_continue = self.driver.find_element(*RegistrationPageLocators.CONTINUE_BUTTON)
         button_continue.click()
+
+    def change_password(self, old_password, new_password, confirm_password):
+        account_link = self.driver.find_element(*ChangePasswordPageLocators.ACCOUNT_LINK)
+        account_link.click()
+        change_password_link = self.driver.find_element(*ChangePasswordPageLocators.CHANGE_PASSWORD_LINK)
+        change_password_link.click()
+        old_password_field = self.driver.find_element(*ChangePasswordPageLocators.OLD_PASSWORD)
+        old_password_field.send_keys(old_password)
+        new_password_field = self.driver.find_element(*ChangePasswordPageLocators.NEW_PASSWORD)
+        new_password_field.send_keys(new_password)
+        confirm_password_field = self.driver.find_element(*ChangePasswordPageLocators.CONFIRM_PASSWORD)
+        confirm_password_field.send_keys(confirm_password)
+        change_password_button = self.driver.find_element(*ChangePasswordPageLocators.CHANGE_PASSWORD_BUTTON)
+        change_password_button.click()
+
