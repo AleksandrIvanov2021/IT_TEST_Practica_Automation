@@ -23,3 +23,15 @@ class LoginPageLocators:
     LOGIN_PASSWORD = (By.CSS_SELECTOR, "#Password")
     CHECKBOX_SAVE = (By.CSS_SELECTOR, "#RememberMe")
     LOGIN_BUTTON = (By.CSS_SELECTOR, ".button-1.login-button")
+
+
+class ChangePasswordPageLocators:
+    ACCOUNT_LINK = (By.CSS_SELECTOR, ".header-links>ul>li>a.account")
+    CHANGE_PASSWORD_LINK = (By.CSS_SELECTOR, ".list>li:nth-child(7)>a")
+    CHANGE_PASSWORD_FORM = (By.CSS_SELECTOR, ".fieldset")
+    OLD_PASSWORD = (By.CSS_SELECTOR, "#OldPassword")
+    NEW_PASSWORD = (By.CSS_SELECTOR, "#NewPassword")
+    CONFIRM_PASSWORD = (By.CSS_SELECTOR, "#ConfirmNewPassword")
+    CHANGE_PASSWORD_BUTTON = (By.CSS_SELECTOR, ".button-1.change-password-button")
+
+
