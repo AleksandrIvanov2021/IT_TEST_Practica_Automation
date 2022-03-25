@@ -10,11 +10,11 @@ class RegistrationPage(BasePage):
         self.__should_be_password_form()
         self.__should_be_gender_male_radiobutton()
         self.__should_be_gender_female_radiobutton()
-        self.__should_be_first_name_form()
-        self.__should_be_last_name_form()
-        self.__should_be_email_form()
-        self.__should_be_password()
-        self.__should_be_conform_password()
+        self.__should_be_first_name_field()
+        self.__should_be_last_name_field()
+        self.__should_be_email_field()
+        self.__should_be_password_field()
+        self.__should_be_conform_password_field()
         self.__should_be_register_button()
 
     def __should_be_registration_url(self):
@@ -28,7 +28,7 @@ class RegistrationPage(BasePage):
             "Personal Details form is not presented"
 
     def __should_be_password_form(self):
-        assert self.is_element_present(*RegistrationPageLocators.PASSWORD_FORM), "Password form is not presented"
+        assert self.is_element_present(*RegistrationPageLocators.PASSWORD_FORM), "Password field is not presented"
 
     def __should_be_gender_male_radiobutton(self):
         assert self.is_element_present(*RegistrationPageLocators.GENDER_MALE_RADIOBUTTON), \
@@ -38,24 +38,27 @@ class RegistrationPage(BasePage):
         assert self.is_element_present(*RegistrationPageLocators.GENDER_FEMALE_RADIOBUTTON), \
             "Female radio is not presented"
 
-    def __should_be_first_name_form(self):
-        assert self.is_element_present(*RegistrationPageLocators.FIRST_NAME), "first name form is not presented"
+    def __should_be_first_name_field(self):
+        assert self.is_element_present(*RegistrationPageLocators.FIRST_NAME), "first name field is not presented"
 
-    def __should_be_last_name_form(self):
-        assert self.is_element_present(*RegistrationPageLocators.LAST_NAME), "last name form is not presented"
+    def __should_be_last_name_field(self):
+        assert self.is_element_present(*RegistrationPageLocators.LAST_NAME), "last name field is not presented"
 
-    def __should_be_email_form(self):
-        assert self.is_element_present(*RegistrationPageLocators.REGISTER_EMAIL), "email form is not presented"
+    def __should_be_email_field(self):
+        assert self.is_element_present(*RegistrationPageLocators.REGISTER_EMAIL), "email field is not presented"
 
-    def __should_be_password(self):
-        assert self.is_element_present(*RegistrationPageLocators.REGISTER_PASSWORD_1), "password form is not presented"
+    def __should_be_password_field(self):
+        assert self.is_element_present(*RegistrationPageLocators.REGISTER_PASSWORD_1), "password field is not presented"
 
-    def __should_be_conform_password(self):
+    def __should_be_conform_password_field(self):
         assert self.is_element_present(*RegistrationPageLocators.REGISTER_PASSWORD_2), \
-            "confirm password is not presented"
+            "confirm password field is not presented"
 
     def __should_be_register_button(self):
         assert self.is_element_present(*RegistrationPageLocators.REGISTER_BUTTON), "register button is not presented"
+
+    def __should_be_continue_button(self):
+        assert self.is_element_present(*RegistrationPageLocators.CONTINUE_BUTTON), "continue button is not presented"
 
     def register_new_user(self, first_name, last_name, email, password, confirm_password):
         radiobutton_gender_field = self.driver.find_element(*RegistrationPageLocators.GENDER_FEMALE_RADIOBUTTON)
@@ -72,4 +75,7 @@ class RegistrationPage(BasePage):
         confirm_password_field.send_keys(confirm_password)
         button_registration_submit = self.driver.find_element(*RegistrationPageLocators.REGISTER_BUTTON)
         button_registration_submit.click()
+        self.__should_be_continue_button()
+        button_continue = self.driver.find_element(*RegistrationPageLocators.CONTINUE_BUTTON)
+        button_continue.click()
 
