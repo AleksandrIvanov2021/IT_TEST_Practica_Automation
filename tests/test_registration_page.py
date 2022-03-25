@@ -1,5 +1,4 @@
 from page.registration_page import RegistrationPage
-import pytest
 import random
 import time
 
@@ -11,7 +10,7 @@ def test_guest_see_registration_page(driver):               # проверка �
     page.should_be_registration_page()
 
 
-def test_registration_new_user(driver):                     # регистрация нового пользователя
+def test_registration_new_user(driver):                     # регистрация нового пользователя c авторизацией на сайте
     link = "http://demowebshop.tricentis.com/register"
     page = RegistrationPage(driver, link)
     page.open()
@@ -22,5 +21,6 @@ def test_registration_new_user(driver):                     # регистрац
     password = str(time.time() + count)
     confirm_password = password
     page.register_new_user(first_name, last_name, email, password, confirm_password)
+    time.sleep(3)
 
 
