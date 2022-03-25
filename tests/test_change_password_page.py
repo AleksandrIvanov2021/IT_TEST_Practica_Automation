@@ -1,5 +1,8 @@
 from page.change_password_page import ChangePasswordPage
 from page.login_page import LoginPage
+from page.registration_page import RegistrationPage
+import random
+import time
 
 
 def test_guest_see_registration_page(driver):        # авторизация, затем проверка перехода на страницу смены пароля и
@@ -15,3 +18,23 @@ def test_guest_see_registration_page(driver):        # авторизация, �
     page.should_be_change_password()
 
 
+def test_change_password(driver):   # регистрация нового пользователя, переход на страницу смены пароля и его изменение
+    link = "http://demowebshop.tricentis.com/register"
+    page = RegistrationPage(driver, link)
+    page.open()
+    count = random.randint(1, 10000)
+    first_name = str("Anton") + str(count)
+    last_name = str("Arnoldov") + str(count)
+    email = str(time.time()) + "@fakemail.org"
+    password = 123456
+    confirm_password = password
+    page.register_new_user(first_name, last_name, email, password, confirm_password)
+    time.sleep(2)
+    link = "http://demowebshop.tricentis.com/"
+    page = ChangePasswordPage(driver, link)
+    page.open()
+    old_password = password
+    new_password = str(time.time() + count)
+    confirm_password = new_password
+    page.change_password(old_password, new_password, confirm_password)
+    time.sleep(2)
