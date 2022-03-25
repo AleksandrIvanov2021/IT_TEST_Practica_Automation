@@ -14,7 +14,7 @@ def test_registration_new_user(driver):                     # регистрац
     link = "http://demowebshop.tricentis.com/register"
     page = RegistrationPage(driver, link)
     page.open()
-    count = random.randint(1, 100)
+    count = random.randint(1, 10000)
     first_name = str("Anton") + str(count)
     last_name = str("Arnoldov") + str(count)
     email = str(time.time()) + "@fakemail.org"
