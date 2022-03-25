@@ -1,5 +1,4 @@
 from selenium.common.exceptions import NoSuchElementException
-from page.locators import BasePageLocators
 
 
 class BasePage:
