@@ -1,10 +1,6 @@
 from selenium.webdriver.common.by import By
 
 
-class BasePageLocators:
-    REGISTR_LINK = (By.CSS_SELECTOR, ".ico-register")
-
-
 class RegistrationPageLocators:
     REGISTRATION_URL = (By.CSS_SELECTOR, ".ico-register")
     PERSONAL_DETAILS_FORM = (By.CSS_SELECTOR, ".fieldset:nth-child(2)")
@@ -17,3 +13,13 @@ class RegistrationPageLocators:
     REGISTER_PASSWORD_1 = (By.CSS_SELECTOR, "#Password")
     REGISTER_PASSWORD_2 = (By.CSS_SELECTOR, "#ConfirmPassword")
     REGISTER_BUTTON = (By.CSS_SELECTOR, "#register-button")
+    CONTINUE_BUTTON = (By.CSS_SELECTOR, ".button-1.register-continue-button")
+
+
+class LoginPageLocators:
+    LOGIN_URL = (By.CSS_SELECTOR, ".ico-login")
+    RETURNING_CUSTOMER_FORM = (By.CSS_SELECTOR, ".returning-wrapper")
+    LOGIN_EMAIL = (By.CSS_SELECTOR, "#Email")
+    LOGIN_PASSWORD = (By.CSS_SELECTOR, "#Password")
+    CHECKBOX_SAVE = (By.CSS_SELECTOR, "#RememberMe")
+    LOGIN_BUTTON = (By.CSS_SELECTOR, ".button-1.login-button")
