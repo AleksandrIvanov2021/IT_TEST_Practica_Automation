@@ -4,14 +4,14 @@ import random
 import time
 
 
-def test_guest_see_registration_page(driver):             # проверка перехода на страницу регистрации и веб-элементов
+def test_guest_see_registration_page(driver):               # проверка перехода на страницу регистрации и веб-элементов
     link = "http://demowebshop.tricentis.com/"
     page = RegistrationPage(driver, link)
     page.open()
     page.should_be_registration_page()
 
 
-def test_registration_new_user(driver):                   # регистрация нового пользователя
+def test_registration_new_user(driver):                     # регистрация нового пользователя
     link = "http://demowebshop.tricentis.com/register"
     page = RegistrationPage(driver, link)
     page.open()
