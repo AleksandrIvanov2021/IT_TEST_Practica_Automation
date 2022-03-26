@@ -1,4 +1,6 @@
+import pytest
 from page.login_page import LoginPage
+import random
 import time
 
 
@@ -17,3 +19,15 @@ def test_authorized_user(driver):                    # авторизация с
     password = '123456'
     page.should_be_authorized_user(email, password)
     time.sleep(3)
+
+
+@pytest.mark.xfail
+def test_authorized_incorrect(driver):                # авторизация несуществующего пользователя
+    link = 'http://demowebshop.tricentis.com/login'
+    page = LoginPage(driver, link)
+    page.open()
+    count = random.randint(1, 10000)
+    email = str(count) + '@mail.com'
+    password = str(count) + '9124723785623'
+    page.should_be_authorized_user(email, password)
+    time.sleep(2)
