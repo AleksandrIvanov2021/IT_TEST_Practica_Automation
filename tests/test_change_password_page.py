@@ -5,7 +5,7 @@ import random
 import time
 
 
-def test_guest_see_registration_page(driver):        # авторизация, затем проверка перехода на страницу смены пароля и
+def test_guest_see_change_password_page(driver):     # авторизация, затем проверка перехода на страницу смены пароля и
     link = 'http://demowebshop.tricentis.com/login'  # проверка веб элементов на странице
     page = LoginPage(driver, link)
     page.open()
