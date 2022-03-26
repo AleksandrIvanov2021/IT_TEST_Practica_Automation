@@ -23,6 +23,9 @@ class LoginPageLocators:
     LOGIN_PASSWORD = (By.CSS_SELECTOR, "#Password")
     CHECKBOX_SAVE = (By.CSS_SELECTOR, "#RememberMe")
     LOGIN_BUTTON = (By.CSS_SELECTOR, ".button-1.login-button")
+    FORGOT_PASSWORD = (By.CSS_SELECTOR, ".inputs.reversed>span>a")
+    RECOVERY_BUTTON = (By.CSS_SELECTOR, ".button-1.password-recovery-button")
+    RECOVERY_MESSAGE = (By.CSS_SELECTOR, ".page-body>.result")
 
 
 class ChangePasswordPageLocators:
