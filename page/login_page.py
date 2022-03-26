@@ -10,6 +10,7 @@ class LoginPage(BasePage):
         self.__should_be_login_password_field()
         self.__should_be_checkbox_save()
         self.__should_be_login_button()
+        self.__should_be_forgot_password_link()
 
     def __should_be_login_url(self):
         assert self.is_element_present(*LoginPageLocators.LOGIN_URL), "Login url is not presented"
@@ -31,5 +32,20 @@ class LoginPage(BasePage):
 
     def __should_be_login_button(self):
         assert self.is_element_present(*LoginPageLocators.LOGIN_BUTTON), "Login button is not presented"
+
+    def __should_be_forgot_password_link(self):
+        assert self.is_element_present(*LoginPageLocators.FORGOT_PASSWORD), "Forgot password link is not presented"
+
+    def forgot_password_recovery(self, email):
+        assert self.is_element_present(*LoginPageLocators.FORGOT_PASSWORD), "Forgot password link is not presented"
+        forgot_password_link = self.driver.find_element(*LoginPageLocators.FORGOT_PASSWORD)
+        forgot_password_link.click()
+        email_recovery = self.driver.find_element(*LoginPageLocators.LOGIN_EMAIL)
+        email_recovery.send_keys(email)
+        recovery_button = self.driver.find_element(*LoginPageLocators.RECOVERY_BUTTON)
+        recovery_button.click()
+        message_recovery = self.driver.find_element(*LoginPageLocators.RECOVERY_MESSAGE).text
+        assert message_recovery == "Email with instructions has been sent to you.", "Error recovery password"
+
 
 
