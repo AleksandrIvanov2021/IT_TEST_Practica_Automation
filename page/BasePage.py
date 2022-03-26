@@ -27,6 +27,7 @@ class BasePage:
         checkbox.click()
         login_button = self.driver.find_element(*LoginPageLocators.LOGIN_BUTTON)
         login_button.click()
+        assert self.is_element_present(*ChangePasswordPageLocators.ACCOUNT_LINK), "Authorization failed"
 
     def register_new_user(self, first_name, last_name, email, password, confirm_password):
         radiobutton_gender_field = self.driver.find_element(*RegistrationPageLocators.GENDER_FEMALE_RADIOBUTTON)
@@ -46,6 +47,7 @@ class BasePage:
         assert self.is_element_present(*RegistrationPageLocators.CONTINUE_BUTTON), "continue button is not presented"
         button_continue = self.driver.find_element(*RegistrationPageLocators.CONTINUE_BUTTON)
         button_continue.click()
+        assert self.is_element_present(*ChangePasswordPageLocators.ACCOUNT_LINK), "Registration failed"
 
     def change_password(self, old_password, new_password, confirm_password):
         account_link = self.driver.find_element(*ChangePasswordPageLocators.ACCOUNT_LINK)
@@ -60,4 +62,7 @@ class BasePage:
         confirm_password_field.send_keys(confirm_password)
         change_password_button = self.driver.find_element(*ChangePasswordPageLocators.CHANGE_PASSWORD_BUTTON)
         change_password_button.click()
+        message = self.driver.find_element(*ChangePasswordPageLocators.CHANGE_MESSAGE).text
+        assert message == 'Password was changed', 'Error when changing password'
+
 
