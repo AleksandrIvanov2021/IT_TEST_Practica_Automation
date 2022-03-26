@@ -31,3 +31,12 @@ def test_authorized_incorrect(driver):                # авторизация �
     password = str(count) + '9124723785623'
     page.should_be_authorized_user(email, password)
     time.sleep(2)
+
+
+def test_password_recovery(driver):                    # проверка восстановления пароля (забыли пароль?)
+    link = 'http://demowebshop.tricentis.com/login'
+    page = LoginPage(driver, link)
+    page.open()
+    email = 'Tokar@mail.com'
+    page.forgot_password_recovery(email)
+    time.sleep(2)
