@@ -47,5 +47,22 @@ class LoginPage(BasePage):
         message_recovery = self.driver.find_element(*LoginPageLocators.RECOVERY_MESSAGE).text
         assert message_recovery == "Email with instructions has been sent to you.", "Error recovery password"
 
+    def authorization_with_empty_fields(self):
+        login_button = self.driver.find_element(*LoginPageLocators.LOGIN_BUTTON)
+        login_button.click()
+        login_message = self.driver.find_element(*LoginPageLocators.LOGIN_MESSAGE).text
+        assert login_message == "Login was unsuccessful. Please correct the errors and try again."
+        login_account_message = self.driver.find_element(*LoginPageLocators.LOGIN_ACCOUNT_MESSAGE).text
+        assert login_account_message == "No customer account found"
+
+    def authorization_with_incorrect_password(self, email):
+        email_field = self.driver.find_element(*LoginPageLocators.LOGIN_EMAIL)
+        email_field.send_keys(email)
+        login_button = self.driver.find_element(*LoginPageLocators.LOGIN_BUTTON)
+        login_button.click()
+        login_message = self.driver.find_element(*LoginPageLocators.LOGIN_MESSAGE).text
+        assert login_message == "Login was unsuccessful. Please correct the errors and try again."
+        login_account_message = self.driver.find_element(*LoginPageLocators.LOGIN_ACCOUNT_MESSAGE).text
+        assert login_account_message == "The credentials provided are incorrect"
 
 
