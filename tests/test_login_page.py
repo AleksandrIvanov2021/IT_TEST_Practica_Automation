@@ -18,7 +18,7 @@ def test_authorized_user(driver):                    # авторизация с
     email = 'Tokar@mail.com'
     password = '123456'
     page.should_be_authorized_user(email, password)
-    time.sleep(3)
+    time.sleep(2)
 
 
 @pytest.mark.xfail
@@ -40,3 +40,21 @@ def test_password_recovery(driver):                    # проверка вос
     email = 'Tokar@mail.com'
     page.forgot_password_recovery(email)
     time.sleep(2)
+
+
+def test_authorization_with_empty_fields(driver):      # авторизация с пустыми полями (проверка появлющихся сообщений)
+    link = 'http://demowebshop.tricentis.com/login'
+    page = LoginPage(driver, link)
+    page.open()
+    page.authorization_with_empty_fields()
+    time.sleep(2)
+
+
+def test_authorization_with_incorrect_password(driver):  # авторизация с некорректным паролем(проверка появл. сообщений)
+    link = 'http://demowebshop.tricentis.com/login'
+    page = LoginPage(driver, link)
+    page.open()
+    email = 'Tokar@mail.com'
+    page.authorization_with_incorrect_password(email)
+    time.sleep(2)
+
