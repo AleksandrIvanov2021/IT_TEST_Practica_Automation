@@ -39,3 +39,15 @@ class ChangePasswordPage(BasePage):
 
     def __should_be_change_password_button(self):
         assert self.is_element_present(*ChangePasswordPageLocators.CHANGE_PASSWORD_BUTTON), "Button is not presented"
+
+    def change_incorrect_old_password(self, old_password, new_password, confirm_password):
+        old_password_field = self.driver.find_element(*ChangePasswordPageLocators.OLD_PASSWORD)
+        old_password_field.send_keys(old_password)
+        new_password_field = self.driver.find_element(*ChangePasswordPageLocators.NEW_PASSWORD)
+        new_password_field.send_keys(new_password)
+        confirm_password_field = self.driver.find_element(*ChangePasswordPageLocators.CONFIRM_PASSWORD)
+        confirm_password_field.send_keys(confirm_password)
+        change_password_button = self.driver.find_element(*ChangePasswordPageLocators.CHANGE_PASSWORD_BUTTON)
+        change_password_button.click()
+        change_message = self.driver.find_element(*ChangePasswordPageLocators.CHANGE_MESSAGE_INCORRECT).text
+        assert change_message == "Old password doesn't match"
