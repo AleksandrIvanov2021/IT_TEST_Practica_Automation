@@ -26,6 +26,8 @@ class LoginPageLocators:
     FORGOT_PASSWORD = (By.CSS_SELECTOR, ".inputs.reversed>span>a")
     RECOVERY_BUTTON = (By.CSS_SELECTOR, ".button-1.password-recovery-button")
     RECOVERY_MESSAGE = (By.CSS_SELECTOR, ".page-body>.result")
+    LOGIN_MESSAGE = (By.CSS_SELECTOR, ".validation-summary-errors>span")
+    LOGIN_ACCOUNT_MESSAGE = (By.CSS_SELECTOR, ".validation-summary-errors>ul>li")
 
 
 class ChangePasswordPageLocators:
