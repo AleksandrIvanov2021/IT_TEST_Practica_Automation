@@ -40,3 +40,24 @@ def test_registration_incorrect_email(driver):               # регистра�
     time.sleep(3)
 
 
+def test_short_password_length(driver):                      # проверка поля пароля на появление предупреждения при
+    link = "http://demowebshop.tricentis.com/register"       # вводе меньшего кол-ва необх. символов (минимальное - 6)
+    page = RegistrationPage(driver, link)
+    page.open()
+    password = '123'
+    confirm_password = password
+    page.short_password_length(password, confirm_password)
+    time.sleep(2)
+
+
+def test_registration_with_empty_field_first_name(driver):   # регистрация с пустым полем 'FIRST NAME'
+    link = "http://demowebshop.tricentis.com/register"       # (проверка предупреждения о незаполненном поле)
+    page = RegistrationPage(driver, link)
+    page.open()
+    count = random.randint(1, 10000)
+    last_name = str("Arnoldov") + str(count)
+    email = str(time.time()) + "@fakemail.org"
+    password = str(time.time() + count)
+    confirm_password = password
+    page.registration_with_empty_field_first_name(last_name, email, password, confirm_password)
+    time.sleep(2)
