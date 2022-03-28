@@ -14,6 +14,8 @@ class RegistrationPageLocators:
     REGISTER_PASSWORD_2 = (By.CSS_SELECTOR, "#ConfirmPassword")
     REGISTER_BUTTON = (By.CSS_SELECTOR, "#register-button")
     CONTINUE_BUTTON = (By.CSS_SELECTOR, ".button-1.register-continue-button")
+    LENGTH_PASSWORD_MESSAGE = (By.CSS_SELECTOR, ".field-validation-error>[for='Password']")
+    EMPTY_FIRST_NAME_MESSAGE = (By.CSS_SELECTOR, ".field-validation-error>[for='FirstName']")
 
 
 class LoginPageLocators:
