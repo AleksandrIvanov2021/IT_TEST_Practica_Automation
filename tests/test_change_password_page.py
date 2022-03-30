@@ -1,10 +1,12 @@
 from page.change_password_page import ChangePasswordPage
 from page.login_page import LoginPage
 from page.registration_page import RegistrationPage
+import pytest
 import random
 import time
 
 
+@pytest.mark.critical_tests
 def test_guest_see_change_password_page(driver):     # авторизация, затем проверка перехода на страницу смены пароля и
     link = 'http://demowebshop.tricentis.com/login'  # проверка веб элементов на странице
     page = LoginPage(driver, link)
@@ -12,12 +14,13 @@ def test_guest_see_change_password_page(driver):     # авторизация, �
     email = 'Tokar@mail.com'
     password = '123456'
     page.should_be_authorized_user(email, password)
-    link = 'http://demowebshop.tricentis.com/'
+    link = 'http://demowebshop.tricentis.com/customer/changepassword'
     page = ChangePasswordPage(driver, link)
     page.open()
     page.should_be_change_password()
 
 
+@pytest.mark.critical_tests
 def test_change_password(driver):   # регистрация нового пользователя, переход на страницу смены пароля и его изменение
     link = "http://demowebshop.tricentis.com/register"      # (проверка сообщения об успешном изменении)
     page = RegistrationPage(driver, link)
@@ -29,7 +32,7 @@ def test_change_password(driver):   # регистрация нового пол
     password = 123456
     confirm_password = password
     page.register_new_user(first_name, last_name, email, password, confirm_password)
-    link = "http://demowebshop.tricentis.com/"
+    link = "http://demowebshop.tricentis.com/customer/changepassword"
     page = ChangePasswordPage(driver, link)
     page.open()
     old_password = password
