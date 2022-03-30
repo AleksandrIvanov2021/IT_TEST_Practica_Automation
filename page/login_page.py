@@ -4,19 +4,12 @@ from page.locators import LoginPageLocators
 
 class LoginPage(BasePage):
     def should_be_login_page(self):
-        self.__should_be_login_url()
         self.__should_be_returning_customer_form()
         self.__should_be_login_email_field()
         self.__should_be_login_password_field()
         self.__should_be_checkbox_save()
         self.__should_be_login_button()
         self.__should_be_forgot_password_link()
-
-    def __should_be_login_url(self):
-        assert self.is_element_present(*LoginPageLocators.LOGIN_URL), "Login url is not presented"
-        login_link = self.driver.find_element(*LoginPageLocators.LOGIN_URL)
-        login_link.click()
-        assert "login" in self.driver.current_url, "There is not login in url"
 
     def __should_be_returning_customer_form(self):
         assert self.is_element_present(*LoginPageLocators.RETURNING_CUSTOMER_FORM), "Form is not presented"
