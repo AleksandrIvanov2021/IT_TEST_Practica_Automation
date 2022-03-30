@@ -4,13 +4,15 @@ import random
 import time
 
 
+@pytest.mark.critical_tests
 def test_guest_see_registration_page(driver):               # проверка перехода на страницу регистрации и веб-элементов
-    link = "http://demowebshop.tricentis.com/"
+    link = "http://demowebshop.tricentis.com/register"
     page = RegistrationPage(driver, link)
     page.open()
     page.should_be_registration_page()
 
 
+@pytest.mark.critical_tests
 def test_registration_new_user(driver):                     # регистрация нового пользователя c авторизацией на сайте
     link = "http://demowebshop.tricentis.com/register"
     page = RegistrationPage(driver, link)
