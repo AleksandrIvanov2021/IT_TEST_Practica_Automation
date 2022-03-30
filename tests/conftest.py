@@ -1,6 +1,7 @@
 import pytest
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.options import Options as ChromeOptions
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
 
 
 def pytest_addoption(parser):
@@ -16,18 +17,27 @@ def driver(request):
     if browser_name == "chrome":
         if not request.config.getoption("--headless"):
             print("\nstart chrome browser for test..")
-            options = Options()
+            options = ChromeOptions()
             options.add_argument("--window-size=1280,720")
             driver = webdriver.Chrome(options=options)
         else:
             print("\nstart chrome browser for test..")
-            options = Options()
+            options = ChromeOptions()
             options.add_argument("--headless")
             options.add_argument("--window-size=1280,720")
             driver = webdriver.Chrome(options=options)
     elif browser_name == "firefox":
-        print("\nstart firefox browser for test..")
-        driver = webdriver.Firefox()
+        if not request.config.getoption("--headless"):
+            print("\nstart chrome browser for test..")
+            options = FirefoxOptions()
+            options.add_argument("--window-size=1280,720")
+            driver = webdriver.Firefox(options=options)
+        else:
+            print("\nstart chrome browser for test..")
+            options = FirefoxOptions()
+            options.add_argument("--headless")
+            options.add_argument("--window-size=1280,720")
+            driver = webdriver.Firefox(options=options)
     else:
         raise pytest.UsageError("--browser_name should be chrome or firefox")
     yield driver
