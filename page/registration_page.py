@@ -5,7 +5,6 @@ from page.locators import RegistrationPageLocators
 class RegistrationPage(BasePage):
 
     def should_be_registration_page(self):
-        self.__should_be_registration_url()
         self.__should_be_personal_detail_form()
         self.__should_be_password_form()
         self.__should_be_gender_male_radiobutton()
@@ -16,12 +15,6 @@ class RegistrationPage(BasePage):
         self.__should_be_password_field()
         self.__should_be_conform_password_field()
         self.__should_be_register_button()
-
-    def __should_be_registration_url(self):
-        assert self.is_element_present(*RegistrationPageLocators.REGISTRATION_URL), "Login url is not presented"
-        login_link = self.driver.find_element(*RegistrationPageLocators.REGISTRATION_URL)
-        login_link.click()
-        assert "register" in self.driver.current_url, "There is not register in url"
 
     def __should_be_personal_detail_form(self):
         assert self.is_element_present(*RegistrationPageLocators.PERSONAL_DETAILS_FORM), \
