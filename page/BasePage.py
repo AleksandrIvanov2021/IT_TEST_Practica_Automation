@@ -1,5 +1,5 @@
 from selenium.common.exceptions import NoSuchElementException
-from page.locators import LoginPageLocators, RegistrationPageLocators, ChangePasswordPageLocators
+from page.locators import LoginPageLocators, RegistrationPageLocators, ChangePasswordPageLocators, MainPageLocators
 
 
 class BasePage:
@@ -18,6 +18,31 @@ class BasePage:
             return False
         return True
 
+    def should_be_registration_url(self):
+        assert self.is_element_present(*MainPageLocators.REGISTRATION_URL), "Login url is not presented"
+        login_link = self.driver.find_element(*MainPageLocators.REGISTRATION_URL)
+        login_link.click()
+        assert "register" in self.driver.current_url, "There is not register in url"
+
+    def should_be_login_url(self):
+        assert self.is_element_present(*MainPageLocators.LOGIN_URL), "Login url is not presented"
+        login_link = self.driver.find_element(*MainPageLocators.LOGIN_URL)
+        login_link.click()
+        assert "login" in self.driver.current_url, "There is not login in url"
+
+    def should_be_account_url(self):
+        assert self.is_element_present(*MainPageLocators.ACCOUNT_LINK), "Account url is not presented"
+        login_link = self.driver.find_element(*MainPageLocators.ACCOUNT_LINK)
+        login_link.click()
+        assert "customer/info" in self.driver.current_url, "There is not account in url"
+
+    def should_be_change_password_url(self):
+        assert self.is_element_present(*MainPageLocators.CHANGE_PASSWORD_LINK), \
+            "Change password url is not presented"
+        login_link2 = self.driver.find_element(*MainPageLocators.CHANGE_PASSWORD_LINK)
+        login_link2.click()
+        assert "customer/changepassword" in self.driver.current_url, "There is not change password in url"
+
     def should_be_authorized_user(self, email, password):
         email_field = self.driver.find_element(*LoginPageLocators.LOGIN_EMAIL)
         email_field.send_keys(email)
@@ -27,7 +52,7 @@ class BasePage:
         checkbox.click()
         login_button = self.driver.find_element(*LoginPageLocators.LOGIN_BUTTON)
         login_button.click()
-        assert self.is_element_present(*ChangePasswordPageLocators.ACCOUNT_LINK), "Authorization failed"
+        assert self.is_element_present(*MainPageLocators.ACCOUNT_LINK), "Authorization failed"
 
     def register_new_user(self, first_name, last_name, email, password, confirm_password):
         radiobutton_gender_field = self.driver.find_element(*RegistrationPageLocators.GENDER_FEMALE_RADIOBUTTON)
@@ -47,13 +72,9 @@ class BasePage:
         assert self.is_element_present(*RegistrationPageLocators.CONTINUE_BUTTON), "continue button is not presented"
         button_continue = self.driver.find_element(*RegistrationPageLocators.CONTINUE_BUTTON)
         button_continue.click()
-        assert self.is_element_present(*ChangePasswordPageLocators.ACCOUNT_LINK), "Registration failed"
+        assert self.is_element_present(*MainPageLocators.ACCOUNT_LINK), "Registration failed"
 
     def change_password(self, old_password, new_password, confirm_password):
-        account_link = self.driver.find_element(*ChangePasswordPageLocators.ACCOUNT_LINK)
-        account_link.click()
-        change_password_link = self.driver.find_element(*ChangePasswordPageLocators.CHANGE_PASSWORD_LINK)
-        change_password_link.click()
         old_password_field = self.driver.find_element(*ChangePasswordPageLocators.OLD_PASSWORD)
         old_password_field.send_keys(old_password)
         new_password_field = self.driver.find_element(*ChangePasswordPageLocators.NEW_PASSWORD)
