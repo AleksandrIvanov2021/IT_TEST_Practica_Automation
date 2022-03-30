@@ -4,13 +4,15 @@ import random
 import time
 
 
+@pytest.mark.critical_tests
 def test_guest_see_login_page(driver):                # проверка перехода на страницу авторизации и веб-элементов
-    link = "http://demowebshop.tricentis.com/"
+    link = "http://demowebshop.tricentis.com/login"
     page = LoginPage(driver, link)
     page.open()
     page.should_be_login_page()
 
 
+@pytest.mark.critical_tests
 def test_authorized_user(driver):                    # авторизация существующего пользователя
     link = 'http://demowebshop.tricentis.com/login'
     page = LoginPage(driver, link)
