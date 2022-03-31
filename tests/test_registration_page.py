@@ -6,16 +6,16 @@ import time
 
 @pytest.mark.critical_tests
 def test_guest_see_registration_page(driver):               # проверка перехода на страницу регистрации и веб-элементов
-    link = "http://demowebshop.tricentis.com/register"
-    page = RegistrationPage(driver, link)
+    url = "http://demowebshop.tricentis.com/register"
+    page = RegistrationPage(driver, url)
     page.open()
     page.should_be_registration_page()
 
 
 @pytest.mark.critical_tests
 def test_registration_new_user(driver):                     # регистрация нового пользователя c авторизацией на сайте
-    link = "http://demowebshop.tricentis.com/register"
-    page = RegistrationPage(driver, link)
+    url = "http://demowebshop.tricentis.com/register"
+    page = RegistrationPage(driver, url)
     page.open()
     count = random.randint(1, 10000)
     first_name = str("Anton") + str(count)
@@ -29,8 +29,8 @@ def test_registration_new_user(driver):                     # регистрац
 
 @pytest.mark.xfail
 def test_registration_incorrect_email(driver):               # регистрация нового пользователя с некорректным email
-    link = "http://demowebshop.tricentis.com/register"
-    page = RegistrationPage(driver, link)
+    url = "http://demowebshop.tricentis.com/register"
+    page = RegistrationPage(driver, url)
     page.open()
     count = random.randint(1, 10000)
     first_name = str("Anton") + str(count)
@@ -43,8 +43,8 @@ def test_registration_incorrect_email(driver):               # регистра�
 
 
 def test_short_password_length(driver):                      # проверка поля пароля на появление предупреждения при
-    link = "http://demowebshop.tricentis.com/register"       # вводе меньшего кол-ва необх. символов (минимальное - 6)
-    page = RegistrationPage(driver, link)
+    url = "http://demowebshop.tricentis.com/register"       # вводе меньшего кол-ва необх. символов (минимальное - 6)
+    page = RegistrationPage(driver, url)
     page.open()
     password = '123'
     confirm_password = password
@@ -53,8 +53,8 @@ def test_short_password_length(driver):                      # проверка 
 
 
 def test_registration_with_empty_field_first_name(driver):   # регистрация с пустым полем 'FIRST NAME'
-    link = "http://demowebshop.tricentis.com/register"       # (проверка предупреждения о незаполненном поле)
-    page = RegistrationPage(driver, link)
+    url = "http://demowebshop.tricentis.com/register"       # (проверка предупреждения о незаполненном поле)
+    page = RegistrationPage(driver, url)
     page.open()
     count = random.randint(1, 10000)
     last_name = str("Arnoldov") + str(count)
