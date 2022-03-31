@@ -8,22 +8,22 @@ import time
 
 @pytest.mark.critical_tests
 def test_guest_see_change_password_page(driver):     # авторизация, затем проверка перехода на страницу смены пароля и
-    link = 'http://demowebshop.tricentis.com/login'  # проверка веб элементов на странице
-    page = LoginPage(driver, link)
+    url = 'http://demowebshop.tricentis.com/login'  # проверка веб элементов на странице
+    page = LoginPage(driver, url)
     page.open()
     email = 'Tokar@mail.com'
     password = '123456'
     page.should_be_authorized_user(email, password)
-    link = 'http://demowebshop.tricentis.com/customer/changepassword'
-    page = ChangePasswordPage(driver, link)
+    url = 'http://demowebshop.tricentis.com/customer/changepassword'
+    page = ChangePasswordPage(driver, url)
     page.open()
     page.should_be_change_password()
 
 
 @pytest.mark.critical_tests
 def test_change_password(driver):   # регистрация нового пользователя, переход на страницу смены пароля и его изменение
-    link = "http://demowebshop.tricentis.com/register"      # (проверка сообщения об успешном изменении)
-    page = RegistrationPage(driver, link)
+    url = "http://demowebshop.tricentis.com/register"      # (проверка сообщения об успешном изменении)
+    page = RegistrationPage(driver, url)
     page.open()
     count = random.randint(1, 10000)
     first_name = str("Anton") + str(count)
@@ -32,8 +32,8 @@ def test_change_password(driver):   # регистрация нового пол
     password = 123456
     confirm_password = password
     page.register_new_user(first_name, last_name, email, password, confirm_password)
-    link = "http://demowebshop.tricentis.com/customer/changepassword"
-    page = ChangePasswordPage(driver, link)
+    url = "http://demowebshop.tricentis.com/customer/changepassword"
+    page = ChangePasswordPage(driver, url)
     page.open()
     old_password = password
     new_password = str(time.time() + count)
@@ -43,8 +43,8 @@ def test_change_password(driver):   # регистрация нового пол
 
 
 def test_change_incorrect_old_password(driver):         # регистрация, переход на страницу смены пароля, попытка
-    link = "http://demowebshop.tricentis.com/register"  # изменения пароля, введя некорректный старый пароль.
-    page = RegistrationPage(driver, link)               # (проверка появляющегося сообщения об ошибке изменения)
+    url = "http://demowebshop.tricentis.com/register"  # изменения пароля, введя некорректный старый пароль.
+    page = RegistrationPage(driver, url)               # (проверка появляющегося сообщения об ошибке изменения)
     page.open()
     count = random.randint(1, 10000)
     first_name = str("Anton") + str(count)
@@ -53,8 +53,8 @@ def test_change_incorrect_old_password(driver):         # регистрация
     password = 123456
     confirm_password = password
     page.register_new_user(first_name, last_name, email, password, confirm_password)
-    link = "http://demowebshop.tricentis.com/customer/changepassword"
-    page = ChangePasswordPage(driver, link)
+    url = "http://demowebshop.tricentis.com/customer/changepassword"
+    page = ChangePasswordPage(driver, url)
     page.open()
     old_password = 999999
     new_password = str(time.time() + count)
