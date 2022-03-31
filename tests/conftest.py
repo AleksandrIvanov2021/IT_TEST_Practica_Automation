@@ -28,12 +28,12 @@ def driver(request):
             driver = webdriver.Chrome(options=options)
     elif browser_name == "firefox":
         if not request.config.getoption("--headless"):
-            print("\nstart chrome browser for test..")
+            print("\nstart firefox browser for test..")
             options = FirefoxOptions()
             options.add_argument("--window-size=1280,720")
             driver = webdriver.Firefox(options=options)
         else:
-            print("\nstart chrome browser for test..")
+            print("\nstart firefox browser for test..")
             options = FirefoxOptions()
             options.add_argument("--headless")
             options.add_argument("--window-size=1280,720")
