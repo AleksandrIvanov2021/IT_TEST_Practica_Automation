@@ -13,7 +13,7 @@ def test_guest_see_change_password_page(driver):     # авторизация, �
     page.open()
     email = 'Tokar@mail.com'
     password = '123456'
-    page.should_be_authorized_user(email, password)
+    page.authorized_user(email, password)
     url = 'http://demowebshop.tricentis.com/customer/changepassword'
     page = ChangePasswordPage(driver, url)
     page.open()
@@ -31,7 +31,7 @@ def test_change_password(driver):   # регистрация нового пол
     email = str(time.time()) + "@fakemail.org"
     password = 123456
     confirm_password = password
-    page.register_new_user(first_name, last_name, email, password, confirm_password)
+    page.registr_new_user(first_name, last_name, email, password, confirm_password)
     url = "http://demowebshop.tricentis.com/customer/changepassword"
     page = ChangePasswordPage(driver, url)
     page.open()
@@ -39,10 +39,11 @@ def test_change_password(driver):   # регистрация нового пол
     new_password = str(time.time() + count)
     confirm_password = new_password
     page.change_password(old_password, new_password, confirm_password)
+    page.checking_the_password_change_message()
     time.sleep(2)
 
 
-def test_change_incorrect_old_password(driver):         # регистрация, переход на страницу смены пароля, попытка
+def test_change_incorrect_old_password(driver):        # регистрация, переход на страницу смены пароля, попытка
     url = "http://demowebshop.tricentis.com/register"  # изменения пароля, введя некорректный старый пароль.
     page = RegistrationPage(driver, url)               # (проверка появляющегося сообщения об ошибке изменения)
     page.open()
@@ -52,7 +53,7 @@ def test_change_incorrect_old_password(driver):         # регистрация
     email = str(time.time()) + "@fakemail.org"
     password = 123456
     confirm_password = password
-    page.register_new_user(first_name, last_name, email, password, confirm_password)
+    page.registr_new_user(first_name, last_name, email, password, confirm_password)
     url = "http://demowebshop.tricentis.com/customer/changepassword"
     page = ChangePasswordPage(driver, url)
     page.open()
@@ -60,4 +61,5 @@ def test_change_incorrect_old_password(driver):         # регистрация
     new_password = str(time.time() + count)
     confirm_password = new_password
     page.change_incorrect_old_password(old_password, new_password, confirm_password)
+    page.checking_the_incorrect_old_password_message()
     time.sleep(2)
