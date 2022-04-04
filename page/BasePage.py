@@ -1,5 +1,5 @@
 from selenium.common.exceptions import NoSuchElementException
-from page.locators import LoginPageLocators, RegistrationPageLocators, ChangePasswordPageLocators, MainPageLocators
+from page.locators import LoginPageLocators, RegistrationPageLocators, MainPageLocators
 
 
 class BasePage:
@@ -43,47 +43,56 @@ class BasePage:
         login_link2.click()
         assert "customer/changepassword" in self.driver.current_url, "There is not change password in url"
 
-    def should_be_authorized_user(self, email, password):
+    def should_be_account_link(self):
+        assert self.is_element_present(*MainPageLocators.ACCOUNT_LINK), "Account link not found"
+
+    def filling_in_the_email_autorized(self, email):
         email_field = self.driver.find_element(*LoginPageLocators.LOGIN_EMAIL)
         email_field.send_keys(email)
+
+    def filling_in_the_password_autorized(self, password):
         password_field = self.driver.find_element(*LoginPageLocators.LOGIN_PASSWORD)
         password_field.send_keys(password)
+
+    def click_to_checkbox_autorized(self):
         checkbox = self.driver.find_element(*LoginPageLocators.CHECKBOX_SAVE)
         checkbox.click()
+
+    def click_to_login_button_autorized(self):
         login_button = self.driver.find_element(*LoginPageLocators.LOGIN_BUTTON)
         login_button.click()
-        assert self.is_element_present(*MainPageLocators.ACCOUNT_LINK), "Authorization failed"
 
-    def register_new_user(self, first_name, last_name, email, password, confirm_password):
+    def click_to_radiobutton_gender_registr(self):
         radiobutton_gender_field = self.driver.find_element(*RegistrationPageLocators.GENDER_FEMALE_RADIOBUTTON)
         radiobutton_gender_field.click()
+
+    def filling_in_the_first_name_registr(self, first_name):
         first_name_field = self.driver.find_element(*RegistrationPageLocators.FIRST_NAME)
         first_name_field.send_keys(first_name)
+
+    def filling_in_the_last_name_registr(self, last_name):
         last_name_field = self.driver.find_element(*RegistrationPageLocators.LAST_NAME)
         last_name_field.send_keys(last_name)
+
+    def filling_in_the_email_registr(self, email):
         email_field = self.driver.find_element(*RegistrationPageLocators.REGISTER_EMAIL)
         email_field.send_keys(email)
+
+    def filling_in_the_password_registr(self, password):
         password_field = self.driver.find_element(*RegistrationPageLocators.REGISTER_PASSWORD_1)
         password_field.send_keys(password)
+
+    def filling_in_the_confirm_password_registr(self, confirm_password):
         confirm_password_field = self.driver.find_element(*RegistrationPageLocators.REGISTER_PASSWORD_2)
         confirm_password_field.send_keys(confirm_password)
+
+    def click_to_button_registration(self):
         button_registration_submit = self.driver.find_element(*RegistrationPageLocators.REGISTER_BUTTON)
         button_registration_submit.click()
-        assert self.is_element_present(*RegistrationPageLocators.CONTINUE_BUTTON), "continue button is not presented"
+
+    def click_to_button_continue_registration(self):
         button_continue = self.driver.find_element(*RegistrationPageLocators.CONTINUE_BUTTON)
         button_continue.click()
-        assert self.is_element_present(*MainPageLocators.ACCOUNT_LINK), "Registration failed"
 
-    def change_password(self, old_password, new_password, confirm_password):
-        old_password_field = self.driver.find_element(*ChangePasswordPageLocators.OLD_PASSWORD)
-        old_password_field.send_keys(old_password)
-        new_password_field = self.driver.find_element(*ChangePasswordPageLocators.NEW_PASSWORD)
-        new_password_field.send_keys(new_password)
-        confirm_password_field = self.driver.find_element(*ChangePasswordPageLocators.CONFIRM_PASSWORD)
-        confirm_password_field.send_keys(confirm_password)
-        change_password_button = self.driver.find_element(*ChangePasswordPageLocators.CHANGE_PASSWORD_BUTTON)
-        change_password_button.click()
-        message = self.driver.find_element(*ChangePasswordPageLocators.CHANGE_MESSAGE).text
-        assert message == 'Password was changed', 'Error when changing password'
 
 
