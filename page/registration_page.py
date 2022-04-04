@@ -50,26 +50,34 @@ class RegistrationPage(BasePage):
     def __should_be_register_button(self):
         assert self.is_element_present(*RegistrationPageLocators.REGISTER_BUTTON), "register button is not presented"
 
-    def short_password_length(self, password, confirm_password):
-        password_field = self.driver.find_element(*RegistrationPageLocators.REGISTER_PASSWORD_1)
-        password_field.send_keys(password)
-        confirm_password_field = self.driver.find_element(*RegistrationPageLocators.REGISTER_PASSWORD_2)
-        confirm_password_field.send_keys(confirm_password)
+    def length_password_message(self):
         length_password_message = self.driver.find_element(*RegistrationPageLocators.LENGTH_PASSWORD_MESSAGE).text
         assert length_password_message == "The password should have at least 6 characters."
 
-    def registration_with_empty_field_first_name(self, last_name, email, password, confirm_password):
-        last_name_field = self.driver.find_element(*RegistrationPageLocators.LAST_NAME)
-        last_name_field.send_keys(last_name)
-        email_field = self.driver.find_element(*RegistrationPageLocators.REGISTER_EMAIL)
-        email_field.send_keys(email)
-        password_field = self.driver.find_element(*RegistrationPageLocators.REGISTER_PASSWORD_1)
-        password_field.send_keys(password)
-        confirm_password_field = self.driver.find_element(*RegistrationPageLocators.REGISTER_PASSWORD_2)
-        confirm_password_field.send_keys(confirm_password)
-        button_registration_submit = self.driver.find_element(*RegistrationPageLocators.REGISTER_BUTTON)
-        button_registration_submit.click()
+    def first_name_empty_message(self):
         first_name_message = self.driver.find_element(*RegistrationPageLocators.EMPTY_FIRST_NAME_MESSAGE).text
         assert first_name_message == "First name is required."
+
+    def registr_new_user(self, first_name, last_name, email, password, confirm_password):
+        self.click_to_radiobutton_gender_registr()
+        self.filling_in_the_first_name_registr(first_name)
+        self.filling_in_the_last_name_registr(last_name)
+        self.filling_in_the_email_registr(email)
+        self.filling_in_the_password_registr(password)
+        self.filling_in_the_confirm_password_registr(confirm_password)
+        self.click_to_button_registration()
+        self.click_to_button_continue_registration()
+
+    def short_password_length(self, password, confirm_password):
+        self.filling_in_the_password_registr(password)
+        self.filling_in_the_confirm_password_registr(confirm_password)
+
+    def registration_with_empty_field_first_name(self, last_name, email, password, confirm_password):
+        self.filling_in_the_last_name_registr(last_name)
+        self.filling_in_the_email_registr(email)
+        self.filling_in_the_password_registr(password)
+        self.filling_in_the_confirm_password_registr(confirm_password)
+        self.click_to_button_registration()
+
 
 
