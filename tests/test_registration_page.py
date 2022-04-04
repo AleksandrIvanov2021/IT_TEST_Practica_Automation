@@ -14,7 +14,7 @@ def test_guest_see_registration_page(driver):               # проверка �
 
 @pytest.mark.critical_tests
 def test_registration_new_user(driver):                     # регистрация нового пользователя c авторизацией на сайте
-    url = "http://demowebshop.tricentis.com/register"
+    url = "http://demowebshop.tricentis.com/register"         # (проверка аккаунта на вход)
     page = RegistrationPage(driver, url)
     page.open()
     count = random.randint(1, 10000)
@@ -23,13 +23,14 @@ def test_registration_new_user(driver):                     # регистрац
     email = str(time.time()) + "@fakemail.org"
     password = str(time.time() + count)
     confirm_password = password
-    page.register_new_user(first_name, last_name, email, password, confirm_password)
+    page.registr_new_user(first_name, last_name, email, password,confirm_password)
+    page.should_be_account_link()
     time.sleep(3)
 
 
 @pytest.mark.xfail
 def test_registration_incorrect_email(driver):               # регистрация нового пользователя с некорректным email
-    url = "http://demowebshop.tricentis.com/register"
+    url = "http://demowebshop.tricentis.com/register"        # (проверка, что вход неосуществлен)
     page = RegistrationPage(driver, url)
     page.open()
     count = random.randint(1, 10000)
@@ -38,7 +39,8 @@ def test_registration_incorrect_email(driver):               # регистра�
     email = str(time.time()) + "yandex.baton"
     password = str(time.time() + count)
     confirm_password = password
-    page.register_new_user(first_name, last_name, email, password, confirm_password)
+    page.registr_new_user(first_name, last_name, email, password, confirm_password)
+    page.should_be_account_link()
     time.sleep(3)
 
 
@@ -49,6 +51,7 @@ def test_short_password_length(driver):                      # проверка 
     password = '123'
     confirm_password = password
     page.short_password_length(password, confirm_password)
+    page.length_password_message()
     time.sleep(2)
 
 
@@ -62,4 +65,5 @@ def test_registration_with_empty_field_first_name(driver):   # регистра�
     password = str(time.time() + count)
     confirm_password = password
     page.registration_with_empty_field_first_name(last_name, email, password, confirm_password)
+    page.first_name_empty_message()
     time.sleep(2)
