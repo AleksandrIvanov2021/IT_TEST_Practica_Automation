@@ -19,7 +19,8 @@ def test_authorized_user(driver):                    # авторизация с
     page.open()
     email = 'Tokar@mail.com'
     password = '123456'
-    page.should_be_authorized_user(email, password)
+    page.authorized_user(email, password)
+    page.should_be_account_link()
     time.sleep(2)
 
 
@@ -31,16 +32,18 @@ def test_authorized_incorrect(driver):                # авторизация �
     count = random.randint(1, 10000)
     email = str(count) + '@mail.com'
     password = str(count) + '9124723785623'
-    page.should_be_authorized_user(email, password)
+    page.authorized_user(email, password)
+    page.should_be_account_link()
     time.sleep(2)
 
 
 def test_password_recovery(driver):                    # проверка восстановления пароля (забыли пароль?)
-    url = 'http://demowebshop.tricentis.com/login'
+    url = 'http://demowebshop.tricentis.com/login'     # проверка сообщения о восстановлении пароля
     page = LoginPage(driver, url)
     page.open()
     email = 'Tokar@mail.com'
     page.forgot_password_recovery(email)
+    page.forgot_password_message_recovery_success()
     time.sleep(2)
 
 
@@ -48,7 +51,9 @@ def test_authorization_with_empty_fields(driver):      # авторизация 
     url = 'http://demowebshop.tricentis.com/login'
     page = LoginPage(driver, url)
     page.open()
-    page.authorization_with_empty_fields()
+    page.click_to_login_button_autorized()
+    page.login_message_with_empty_fields()
+    page.login_account_message_with_empty_fields()
     time.sleep(2)
 
 
@@ -58,5 +63,7 @@ def test_authorization_with_incorrect_password(driver):  # авторизаци�
     page.open()
     email = 'Tokar@mail.com'
     page.authorization_with_incorrect_password(email)
+    page.login_message_with_incorrect_password()
+    page.login_account_message_with_incorrect_password()
     time.sleep(2)
 
