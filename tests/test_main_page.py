@@ -4,7 +4,7 @@ from page.main_page import MainPage
 
 
 @pytest.mark.critical_tests
-def test_guest_see_main_page(driver):  # Проверка элементов на главной странице (Registr,Login)
+def test_guest_see_main_page(driver):  # Проверка элементов на главной странице (Registr,Login,Books link)
     url = "http://demowebshop.tricentis.com/"
     page = MainPage(driver, url)
     page.open()
