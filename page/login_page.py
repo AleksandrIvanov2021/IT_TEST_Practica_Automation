@@ -61,12 +61,6 @@ class LoginPage(BasePage):
         message_recovery = self.driver.find_element(*LoginPageLocators.RECOVERY_MESSAGE).text
         assert message_recovery == "Email with instructions has been sent to you.", "Error recovery password"
 
-    def authorized_user(self, email, password):
-        self.filling_in_the_email_autorized(email)
-        self.filling_in_the_password_autorized(password)
-        self.click_to_checkbox_autorized()
-        self.click_to_login_button_autorized()
-
     def forgot_password_recovery(self, email):
         self.click_to_forgot_password_link()
         self.filling_email_recovery_forgot_password(email)
