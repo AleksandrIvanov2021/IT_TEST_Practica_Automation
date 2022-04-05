@@ -1,5 +1,5 @@
 from selenium.common.exceptions import NoSuchElementException
-from page.locators import LoginPageLocators, RegistrationPageLocators, MainPageLocators
+from page.locators import LoginPageLocators, RegistrationPageLocators, MainPageLocators, ProductPageLocators
 
 
 class BasePage:
@@ -43,6 +43,28 @@ class BasePage:
         login_link2.click()
         assert "customer/changepassword" in self.driver.current_url, "There is not change password in url"
 
+    def should_be_product_page_books_link(self):
+        assert self.is_element_present(*MainPageLocators.PRODUCT_PAGE_BOOKS_LINK), \
+            "Books link url is not presented"
+        books_link = self.driver.find_element(*MainPageLocators.PRODUCT_PAGE_BOOKS_LINK)
+        books_link.click()
+        assert "/books" in self.driver.current_url, "There is not books link in url"
+
+    def should_be_basket_link(self):
+        assert self.is_element_present(*MainPageLocators.BASKET_LINK), "Basket link is not presented"
+
+    def enter_to_basket(self):
+        basket_link = self.driver.find_element(*MainPageLocators.BASKET_LINK)
+        basket_link.click()
+
+    def add_to_basket_detail_product_page(self):
+        button_add = self.driver.find_element(*ProductPageLocators.ADD_BUTTON_DETAIL_PRODUCT_PAGE)
+        button_add.click()
+
+    def add_to_basket_list_product_page(self):
+        button_add_to_list_product = self.driver.find_element(*ProductPageLocators.ADD_BUTTON_LIST_PRODUCT_PAGE)
+        button_add_to_list_product.click()
+
     def should_be_account_link(self):
         assert self.is_element_present(*MainPageLocators.ACCOUNT_LINK), "Account link not found"
 
@@ -61,6 +83,12 @@ class BasePage:
     def click_to_login_button_autorized(self):
         login_button = self.driver.find_element(*LoginPageLocators.LOGIN_BUTTON)
         login_button.click()
+
+    def authorized_user(self, email, password):
+        self.filling_in_the_email_autorized(email)
+        self.filling_in_the_password_autorized(password)
+        self.click_to_checkbox_autorized()
+        self.click_to_login_button_autorized()
 
     def click_to_radiobutton_gender_registr(self):
         radiobutton_gender_field = self.driver.find_element(*RegistrationPageLocators.GENDER_FEMALE_RADIOBUTTON)
