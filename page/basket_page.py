@@ -1,7 +1,8 @@
 from page.BasePage import BasePage
-from page.locators import BasketPageLocators
+from page.locators import BasketPageLocators, MainPageLocators, AddressPageLocators
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
+import time
 
 
 class BasketPage(BasePage):
@@ -46,12 +47,13 @@ class BasketPage(BasePage):
 
     def click_to_button_checkout_ordering(self):
         checkout_button = self.driver.find_element(*BasketPageLocators.BUTTON_CHECKOUT)
+        self.driver.execute_script("arguments[0].scrollIntoView();", checkout_button)
         checkout_button.click()
 
-    # def drop_down_country_ordering(self):
-    #     element = self.driver.find_element(*BasketPageLocators.ORDERING_COUNTRY)
-    #     drop_dawn_country = Select(element)
-    #     drop_dawn_country.select_by_value("66")
+    def drop_down_country_ordering(self):
+        element = self.driver.find_element(*BasketPageLocators.ORDERING_COUNTRY)
+        drop_dawn_country = Select(element)
+        drop_dawn_country.select_by_value("66")
 
     def filling_in_the_city_ordering(self, city):
         field_city = self.driver.find_element(*BasketPageLocators.ORDERING_CITY)
@@ -73,16 +75,53 @@ class BasketPage(BasePage):
         button_continue = self.driver.find_element(*BasketPageLocators.ORDERING_BUTTON_CONTINUE)
         button_continue.click()
 
+    def click_to_the_button_continue_2_ordering(self):
+        button_continue_2 = self.driver.find_element(*BasketPageLocators.ORDERING_BUTTON_CONTINUE_2)
+        button_continue_2.click()
+
+    def click_to_the_button_continue_3_ordering(self):
+        button_continue_3 = self.driver.find_element(*BasketPageLocators.ORDERING_BUTTON_CONTINUE_3)
+        button_continue_3.click()
+
+    def click_to_the_button_continue_4_ordering(self):
+        button_continue_4 = self.driver.find_element(*BasketPageLocators.ORDERING_BUTTON_CONTINUE_4)
+        button_continue_4.click()
+
+    def click_to_the_button_continue_5_ordering(self):
+        button_continue_5 = self.driver.find_element(*BasketPageLocators.ORDERING_BUTTON_CONTINUE_5)
+        button_continue_5.click()
+
+    def click_to_the_button_continue_6_ordering(self):
+        button_continue_6 = self.driver.find_element(*BasketPageLocators.ORDERING_BUTTON_CONTINUE_6)
+        self.driver.execute_script("arguments[0].scrollIntoView();", button_continue_6)
+        button_continue_6.click()
+
+    def message_success_ordering(self):
+        message_ordering = self.driver.find_element(*BasketPageLocators.MESSAGE_SUCCESS_ORDERING).text
+        assert message_ordering == 'Your order has been successfully processed!', 'Ordering failed'
+
+    def delete_address_user(self):
+        self.driver.find_element(*MainPageLocators.ACCOUNT_LINK).click()
+        time.sleep(1)
+        self.driver.find_element(*MainPageLocators.ADDRESS_LINK).click()
+        self.driver.find_element(*AddressPageLocators.BUTTON_DELETE_ADDRESS).click()
+        confirm = self.driver.switch_to.alert
+        confirm.accept()
+
     def ordering(self, city, address, postal_code, phone):
         self.click_to_checkbox_agreement_ordering()
         self.click_to_button_checkout_ordering()
-       # self.drop_down_country_ordering()
+        self.drop_down_country_ordering()
         self.filling_in_the_city_ordering(city)
         self.filling_in_the_address_ordering(address)
         self.filling_in_the_postal_code_ordering(postal_code)
         self.filling_in_the_phone_ordering(phone)
         self.click_to_the_button_continue_ordering()
-
+        self.click_to_the_button_continue_2_ordering()
+        self.click_to_the_button_continue_3_ordering()
+        self.click_to_the_button_continue_4_ordering()
+        self.click_to_the_button_continue_5_ordering()
+        self.click_to_the_button_continue_6_ordering()
 
 
 
