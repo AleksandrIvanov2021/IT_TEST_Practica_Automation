@@ -43,6 +43,13 @@ class BasePage:
         login_link2.click()
         assert "customer/changepassword" in self.driver.current_url, "There is not change password in url"
 
+    def should_be_address_link(self):
+        assert self.is_element_present(*MainPageLocators.ADDRESS_LINK), \
+            "Address link is not presented"
+        address_link = self.driver.find_element(*MainPageLocators.ADDRESS_LINK)
+        address_link.click()
+        assert "customer/addresses" in self.driver.current_url, "There is not address link"
+
     def should_be_product_page_books_link(self):
         assert self.is_element_present(*MainPageLocators.PRODUCT_PAGE_BOOKS_LINK), \
             "Books link url is not presented"
