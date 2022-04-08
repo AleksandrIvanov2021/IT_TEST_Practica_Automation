@@ -26,8 +26,8 @@ def test_quantity_change_recalculation(driver):         # тест на изме
     time.sleep(2)
 
 
-def test_ordering(driver):
-    url = 'http://demowebshop.tricentis.com/login'
+def test_ordering(driver):        # Авторизация/добавление товара в корзину/оформление заказа/удаление адреса в профиле
+    url = 'http://demowebshop.tricentis.com/login'  # (проверка сообщения о успешном оформлении товара)
     page = LoginPage(driver, url)
     page.open()
     email = 'Tokar@mail.com'
@@ -37,13 +37,16 @@ def test_ordering(driver):
     page = BasketPage(driver, url)
     page.open()
     page.add_to_basket_detail_product_page()
+    time.sleep(1)
     page.enter_to_basket()
-    time.sleep(2)
     city = 'Санкт-Петербург'
     address = 'Невский проспект 23'
     postal_code = '190000'
     phone = '8-900-777-55-55'
     page.ordering(city, address, postal_code, phone)
-    time.sleep(2)
+    time.sleep(1)
+    page.message_success_ordering()
+    page.delete_address_user()
+
 
 
