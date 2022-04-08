@@ -8,6 +8,13 @@ class MainPageLocators:
     CHANGE_PASSWORD_LINK = (By.CSS_SELECTOR, ".list>li:nth-child(7)>a")
     PRODUCT_PAGE_BOOKS_LINK = (By.CSS_SELECTOR, ".inactive>a")
     BASKET_LINK = (By.CSS_SELECTOR, ".ico-cart>span.cart-label")
+    ADDRESS_LINK = (By.CSS_SELECTOR, ".inactive[href='/customer/addresses']")
+
+
+class AddressPageLocators:
+    BUTTON_DELETE_ADDRESS = (By.CSS_SELECTOR, ".button-2.delete-address-button")
+    ADD_NEW_ADDRESS = (By.CSS_SELECTOR, ".button-1.add-address-button")
+    EDIT_ADDRESS = (By.CSS_SELECTOR, ".button-2.edit-address-button")
 
 
 class RegistrationPageLocators:
@@ -64,11 +71,15 @@ class BasketPageLocators:
     TOTAL_PRICE_PRODUCT = (By.CSS_SELECTOR, ".product-subtotal")
     CHECKBOX_AGREEMENT = (By.CSS_SELECTOR, ".terms-of-service #termsofservice")
     BUTTON_CHECKOUT = (By.CSS_SELECTOR, "#checkout[name='checkout']")
-    ORDERING_COUNTRY = (By.CSS_SELECTOR, "#BillingNewAddress_CountryId.valid")
+    ORDERING_COUNTRY = (By.CSS_SELECTOR, "#BillingNewAddress_CountryId[name*='CountryId']")
     ORDERING_CITY = (By.CSS_SELECTOR, "#BillingNewAddress_City ")
     ORDERING_ADDRESS = (By.CSS_SELECTOR, "#BillingNewAddress_Address1")
     ORDERING_POSTAL_CODE = (By.CSS_SELECTOR, "#BillingNewAddress_ZipPostalCode")
     ORDERING_PHONE = (By.CSS_SELECTOR, "#BillingNewAddress_PhoneNumber")
     ORDERING_BUTTON_CONTINUE = (By.CSS_SELECTOR, "#billing-buttons-container>input")
-
-
+    ORDERING_BUTTON_CONTINUE_2 = (By.CSS_SELECTOR, ".button-1.new-address-next-step-button[onclick*='Shipping']")
+    ORDERING_BUTTON_CONTINUE_3 = (By.CSS_SELECTOR, ".button-1.shipping-method-next-step-button")
+    ORDERING_BUTTON_CONTINUE_4 = (By.CSS_SELECTOR, ".button-1.payment-method-next-step-button")
+    ORDERING_BUTTON_CONTINUE_5 = (By.CSS_SELECTOR, ".button-1.payment-info-next-step-button")
+    ORDERING_BUTTON_CONTINUE_6 = (By.CSS_SELECTOR, ".button-1.confirm-order-next-step-button")
+    MESSAGE_SUCCESS_ORDERING = (By.CSS_SELECTOR, ".title>strong")
