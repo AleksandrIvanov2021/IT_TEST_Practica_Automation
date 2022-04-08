@@ -12,3 +12,4 @@ class MainPage(BasePage):
     def should_be_main_page_autorization(self):
         self.should_be_account_url()
         self.should_be_change_password_url()
+        self.should_be_address_link()
