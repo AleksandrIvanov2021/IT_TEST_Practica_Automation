@@ -44,9 +44,16 @@ def driver(request):
     print("\nquit browser..")
     driver.quit()
 
-
-
-
+# запуск тестов
+# pytest -rx -v test_change_password_page.py
+# pytest -rx -v
+# pytest -s -v test_main_page.py
+# pytest -s -v test_basket_page.py --headless
+# pytest -s -v --browser_name=chrome --headless
+# pytest -s -v --browser_name=firefox
+# pytest -s -v --browser_name=chrome
+# pytest -s -v --headless
+# pytest -s -v --browser_name=firefox test_product_page.py
 
 
 
