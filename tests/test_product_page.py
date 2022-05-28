@@ -37,6 +37,7 @@ def test_checking_name_the_added_item(driver):   # проверка соотве
     page = ProductPage(driver, url)
     page.open()
     page.add_to_basket_detail_product_page()
+    time.sleep(1)
     page.should_be_book_name()
     time.sleep(1)
 
@@ -46,5 +47,6 @@ def test_checking_price_the_added_item(driver):   # проверка соотв�
     page = ProductPage(driver, url)
     page.open()
     page.add_to_basket_detail_product_page()
+    time.sleep(1)
     page.should_be_book_price()
     time.sleep(1)
